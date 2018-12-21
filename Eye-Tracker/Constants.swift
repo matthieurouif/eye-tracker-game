@@ -14,5 +14,7 @@ struct Appearance {
     static let lightPinkColor = UIColor(displayP3Red: 246.0/255.0, green: 89.0/255.0, blue: 181.0/255.0, alpha: 1.0)
     static let veryLightPinkColor = UIColor(displayP3Red: 255.0/255.0, green: 119.0/255.0, blue: 211.0/255.0, alpha: 1.0)
     static let veryDarkPinkColor = UIColor(displayP3Red: 110.0/255.0, green: 10.0/255.0, blue: 68.0/255.0, alpha: 1.0)
+    static let blueColor = UIColor(displayP3Red: 48.0/255.0, green: 193.0/255.0, blue: 247.0/255.0, alpha: 1.0)
+
     static let whiteColor = UIColor.white
 }

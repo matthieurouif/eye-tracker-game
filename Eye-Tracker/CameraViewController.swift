@@ -49,7 +49,6 @@ class CameraViewController: UIViewController {
     }
 
     func resumeSessionSuccessfully() {
-        
     }
     /*
     // MARK: - Navigation

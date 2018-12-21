@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DCA387E321CA6517008009ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA387E221CA6517008009ED /* AppDelegate.swift */; };
-		DCA387E521CA6517008009ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA387E421CA6517008009ED /* ViewController.swift */; };
+		DCA387E521CA6517008009ED /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA387E421CA6517008009ED /* PlayViewController.swift */; };
 		DCA387E821CA6517008009ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCA387E621CA6517008009ED /* Main.storyboard */; };
 		DCA387EA21CA651B008009ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCA387E921CA651B008009ED /* Assets.xcassets */; };
 		DCA387ED21CA651B008009ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCA387EB21CA651B008009ED /* LaunchScreen.storyboard */; };
@@ -41,7 +41,7 @@
 /* Begin PBXFileReference section */
 		DCA387DF21CA6517008009ED /* Eye-Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Eye-Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA387E221CA6517008009ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DCA387E421CA6517008009ED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DCA387E421CA6517008009ED /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		DCA387E721CA6517008009ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DCA387E921CA651B008009ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DCA387EC21CA651B008009ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				DCA387E221CA6517008009ED /* AppDelegate.swift */,
-				DCA387E421CA6517008009ED /* ViewController.swift */,
+				DCA387E421CA6517008009ED /* PlayViewController.swift */,
 				DCA3881421CA9388008009ED /* Constants.swift */,
 				DCA3881A21CB9E32008009ED /* CameraViewController.swift */,
 				DCA3881621CB93F7008009ED /* TargetView.swift */,
@@ -272,7 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCA387E521CA6517008009ED /* ViewController.swift in Sources */,
+				DCA387E521CA6517008009ED /* PlayViewController.swift in Sources */,
 				DCA387E321CA6517008009ED /* AppDelegate.swift in Sources */,
 				DCA3881221CA91CC008009ED /* SettingsViewController.swift in Sources */,
 				DCA3881721CB93F7008009ED /* TargetView.swift in Sources */,
