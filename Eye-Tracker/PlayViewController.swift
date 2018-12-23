@@ -11,7 +11,7 @@ import SceneKit
 import ARKit
 import WebKit
 
-class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDelegate {
+class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDelegate, UICollisionBehaviorDelegate {
     
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var eyePositionIndicatorView: UIView!
@@ -21,6 +21,8 @@ class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDele
     @IBOutlet weak var targetView: TargetView!
     @IBOutlet weak var gameView: UIView!
 
+    var thrustBehavior: UIPushBehavior?
+    
     var score: Int = 0 {
         didSet {
             self.scoreLabel.text = "\(score)"
@@ -41,7 +43,7 @@ class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDele
     var eyeRightNode: SCNNode = {
         let geometry = SCNCone(topRadius: 0.005, bottomRadius: 0, height: 0.2)
         geometry.radialSegmentCount = 3
-        geometry.firstMaterial?.diffuse.contents = UIColor.blue
+        geometry.firstMaterial?.diffuse.contents = Appearance.pinkColor
         let node = SCNNode()
         node.geometry = geometry
         node.eulerAngles.x = -.pi / 2
@@ -49,6 +51,14 @@ class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDele
         let parentNode = SCNNode()
         parentNode.addChildNode(node)
         return parentNode
+    }()
+    
+    var lookAtTargetNode: SCNNode = {
+        let geometry = SCNSphere(radius: 0.01)
+        geometry.firstMaterial?.diffuse.contents = UIColor.blue
+        let node = SCNNode()
+        node.geometry = geometry
+        return node
     }()
     
     var lookAtTargetEyeRightNode: SCNNode = SCNNode()
@@ -82,6 +92,7 @@ class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDele
         //collision Behavior
         let collisionBehavior = UICollisionBehavior(items: [targetView])
         collisionBehavior.translatesReferenceBoundsIntoBoundary = true
+        collisionBehavior.collisionDelegate = self
         animator?.addBehavior(collisionBehavior)
         
         //gravity Behavior
@@ -118,11 +129,11 @@ class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDele
         sceneView.scene.rootNode.addChildNode(faceNode)
         sceneView.scene.rootNode.addChildNode(virtualPhoneNode)
         // Set screen as if it was center on the front camera position
-        //        virtualScreenNode.position = SCNVector3(0, 0.135096943231532/2.0, 0)
+        virtualScreenNode.position = SCNVector3(0, 0.135096943231532/2.0, 0)
         virtualPhoneNode.addChildNode(virtualScreenNode)
         faceNode.addChildNode(eyeRightNode)
         eyeRightNode.addChildNode(lookAtTargetEyeRightNode)
-        
+        faceNode.addChildNode(lookAtTargetNode)
         // Set LookAtTargetEye at 2 meters away from the center of eyeballs to create segment vector
         lookAtTargetEyeRightNode.position.z = 2
 
@@ -165,8 +176,23 @@ class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDele
     }
     
     @IBAction func fireAction() {
-        if (eyePositionIndicatorCenterView.frame.intersects(targetView.frame)) {
-            print("collision")
+        let eyePositionIndicatorCenter = eyePositionIndicatorView.convert(eyePositionIndicatorCenterView.frame, to:self.view)
+        if (eyePositionIndicatorCenter.intersects(targetView.frame)) {
+            
+            //thrust Behavior
+            if let thrustBehavior = self.thrustBehavior{
+                animator?.removeBehavior(thrustBehavior)
+            }
+            let thrustBehavior = UIPushBehavior(items:[targetView], mode: .instantaneous)
+            thrustBehavior.magnitude = 10.0
+            let direction = ((eyePositionIndicatorCenter.minX + eyePositionIndicatorCenter.maxX)/2 - targetView.center.x) / (targetView.frame.width/2)
+            thrustBehavior.angle = -CGFloat(.pi / 2 + direction * .pi / 8)
+            animator?.addBehavior(thrustBehavior)
+            self.thrustBehavior = thrustBehavior
+
+            
+            //update score
+            self.score += 1
         }
     }
     
@@ -185,17 +211,16 @@ class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDele
     func update(withFaceAnchor anchor: ARFaceAnchor) {
         
         eyeRightNode.simdTransform = anchor.leftEyeTransform
-        
         var eyeRLookAt = CGPoint()
+        lookAtTargetNode.simdPosition = anchor.lookAtPoint
         
         DispatchQueue.main.async {
             
             // Perform Hit test using the ray segments that are drawn by the center of the eyeballs to somewhere two meters away at direction of where users look at to the virtual plane that place at the same orientation of the phone screen
             
-            let phoneScreenEyeRHitTestResults = self.virtualScreenNode.hitTestWithSegment(from: self.lookAtTargetEyeRightNode.worldPosition, to: self.eyeRightNode.worldPosition, options: nil)
+            let phoneScreenGazeHitTestResults = self.virtualScreenNode.hitTestWithSegment(from: self.lookAtTargetNode.worldPosition, to: self.faceNode.worldPosition, options: nil)
             
-            for result in phoneScreenEyeRHitTestResults {
-                print(result.localCoordinates.x)
+            for result in phoneScreenGazeHitTestResults {
                 eyeRLookAt.x = CGFloat(result.localCoordinates.x) / (self.phoneScreenSize.width) * self.phoneScreenPointSize.width
                 
                 eyeRLookAt.y = -CGFloat(result.localCoordinates.y) / (self.phoneScreenSize.height) * self.phoneScreenPointSize.height
@@ -203,6 +228,20 @@ class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDele
             
             // update indicator position
             self.eyePositionIndicatorView.transform = CGAffineTransform(translationX: eyeRLookAt.x, y: eyeRLookAt.y)
+            
+            let eyePositionIndicatorCenter = self.eyePositionIndicatorView.convert(self.eyePositionIndicatorCenterView.frame, to:self.view)
+            if (eyePositionIndicatorCenter.intersects(self.targetView.frame)) {
+                //target view
+                self.targetView.backgroundColor = Appearance.darkBlueColor
+                self.fireButton.backgroundColor = UIColor.init(white: 1.0, alpha: 0.9)
+                self.fireButton.setTitle("SHOOT NOW", for:.normal)
+            }
+            else {
+                //target view
+                self.targetView.backgroundColor = Appearance.blueColor
+                self.fireButton.backgroundColor = Appearance.whiteColor
+                self.fireButton.setTitle("SHOOT WHERE YOU LOOK", for:.normal)
+            }
         }
         
     }
@@ -217,5 +256,12 @@ class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDele
         update(withFaceAnchor: faceAnchor)
     }
 
+    // MARK: - UICollisionDelegateBehaviour
+    
+    func collisionBehavior(_ behavior: UICollisionBehavior, beganContactFor item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying?, at p: CGPoint) {
+        if (abs (p.y - targetView.superview!.bounds.height) < 3.0) {
+            score = 0
+        }
+    }
 }
 
