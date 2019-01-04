@@ -136,7 +136,6 @@ class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDele
         faceNode.addChildNode(lookAtTargetNode)
         // Set LookAtTargetEye at 2 meters away from the center of eyeballs to create segment vector
         lookAtTargetEyeRightNode.position.z = 2
-
     }
     
     override func resumeSessionSuccessfully() {

@@ -14,8 +14,6 @@
 		DCA387ED21CA651B008009ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCA387EB21CA651B008009ED /* LaunchScreen.storyboard */; };
 		DCA387F821CA651B008009ED /* Eye_TrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA387F721CA651B008009ED /* Eye_TrackerTests.swift */; };
 		DCA3880321CA651B008009ED /* Eye_TrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA3880221CA651B008009ED /* Eye_TrackerUITests.swift */; };
-		DCA3881221CA91CC008009ED /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA3881021CA91CC008009ED /* SettingsViewController.swift */; };
-		DCA3881321CA91CC008009ED /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCA3881121CA91CC008009ED /* SettingsViewController.xib */; };
 		DCA3881521CA9388008009ED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA3881421CA9388008009ED /* Constants.swift */; };
 		DCA3881721CB93F7008009ED /* TargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA3881621CB93F7008009ED /* TargetView.swift */; };
 		DCA3881B21CB9E32008009ED /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA3881A21CB9E32008009ED /* CameraViewController.swift */; };
@@ -52,8 +50,6 @@
 		DCA387FE21CA651B008009ED /* Eye-TrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Eye-TrackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA3880221CA651B008009ED /* Eye_TrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eye_TrackerUITests.swift; sourceTree = "<group>"; };
 		DCA3880421CA651B008009ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DCA3881021CA91CC008009ED /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		DCA3881121CA91CC008009ED /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		DCA3881421CA9388008009ED /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DCA3881621CB93F7008009ED /* TargetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetView.swift; sourceTree = "<group>"; };
 		DCA3881A21CB9E32008009ED /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -108,12 +104,10 @@
 			isa = PBXGroup;
 			children = (
 				DCA387E221CA6517008009ED /* AppDelegate.swift */,
-				DCA387E421CA6517008009ED /* PlayViewController.swift */,
 				DCA3881421CA9388008009ED /* Constants.swift */,
 				DCA3881A21CB9E32008009ED /* CameraViewController.swift */,
+				DCA387E421CA6517008009ED /* PlayViewController.swift */,
 				DCA3881621CB93F7008009ED /* TargetView.swift */,
-				DCA3881021CA91CC008009ED /* SettingsViewController.swift */,
-				DCA3881121CA91CC008009ED /* SettingsViewController.xib */,
 				DCA387E621CA6517008009ED /* Main.storyboard */,
 				DCA387E921CA651B008009ED /* Assets.xcassets */,
 				DCA387EB21CA651B008009ED /* LaunchScreen.storyboard */,
@@ -247,7 +241,6 @@
 				DCA387ED21CA651B008009ED /* LaunchScreen.storyboard in Resources */,
 				DCA387EA21CA651B008009ED /* Assets.xcassets in Resources */,
 				DCA387E821CA6517008009ED /* Main.storyboard in Resources */,
-				DCA3881321CA91CC008009ED /* SettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +267,6 @@
 			files = (
 				DCA387E521CA6517008009ED /* PlayViewController.swift in Sources */,
 				DCA387E321CA6517008009ED /* AppDelegate.swift in Sources */,
-				DCA3881221CA91CC008009ED /* SettingsViewController.swift in Sources */,
 				DCA3881721CB93F7008009ED /* TargetView.swift in Sources */,
 				DCA3881521CA9388008009ED /* Constants.swift in Sources */,
 				DCA3881B21CB9E32008009ED /* CameraViewController.swift in Sources */,

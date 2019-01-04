@@ -25,6 +25,15 @@
                                     <constraint firstAttribute="width" constant="96" id="plb-X4-Zwp"/>
                                 </constraints>
                             </arscnView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJK-3Q-WTR">
+                                <rect key="frame" x="16" y="36" width="343" height="138"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="138" id="Ya8-RS-zku"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="140"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q5z-B2-NO2" userLabel="Game View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="523"/>
                                 <subviews>
@@ -53,15 +62,6 @@
                                     <action selector="fireAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="3xB-H2-AkO"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJK-3Q-WTR">
-                                <rect key="frame" x="16" y="36" width="343" height="138"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="138" id="Ya8-RS-zku"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="140"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xcy-2Q-5fz" userLabel="Aim View">
                                 <rect key="frame" x="123.5" y="269.5" width="128" height="128"/>
                                 <subviews>

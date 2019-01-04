@@ -9,6 +9,7 @@
 import UIKit
 
 struct Appearance {
+    
     static let pinkColor = UIColor(displayP3Red: 227.0/255.0, green: 38.0/255.0, blue: 145.0/255.0, alpha: 1.0)
     static let darkPinkColor = UIColor(displayP3Red: 191.0/255.0, green: 18.0/255.0, blue: 115.0/255.0, alpha: 1.0)
     static let lightPinkColor = UIColor(displayP3Red: 246.0/255.0, green: 89.0/255.0, blue: 181.0/255.0, alpha: 1.0)
