@@ -16,7 +16,6 @@ class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDele
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var eyePositionIndicatorView: UIView!
     @IBOutlet weak var eyePositionIndicatorCenterView: UIView!
-    @IBOutlet weak var fireButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var targetView: TargetView!
     @IBOutlet weak var gameView: UIView!
@@ -105,7 +104,6 @@ class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDele
     func setupUI() {
         //background
         self.view.backgroundColor = Appearance.pinkColor
-        self.fireButton.backgroundColor = Appearance.whiteColor
         
         //score label
         self.scoreLabel.font = UIFont(name: "Futura-CondensedExtraBold", size: 160)
@@ -113,10 +111,6 @@ class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDele
         
         //target view
         self.targetView.backgroundColor = Appearance.blueColor
-        
-        //shoot button
-        self.fireButton.setTitle("SHOOT WHERE YOU LOOK", for: .normal)
-        self.fireButton.setTitleColor(Appearance.veryLightPinkColor, for: .normal)
     }
     
     func setupARSession() {
@@ -165,13 +159,38 @@ class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDele
     
     func restartGame() {
         self.score = 0
+        self.gameStatus = .playing
     }
     
-    func updateScore() {
-    }
-    
-    func moveTarget() {
-        
+    func gameOver() {
+        let bestScore = UserDefaults.standard.integer(forKey: "HighScore")
+        if (score > bestScore) {
+            UserDefaults.standard.set(score, forKey: "HighScore")
+            
+            let message = NSLocalizedString("Best Score Ever: \(score)", comment: "Alert message when the user beat his best score ever")
+            let alertController = UIAlertController(title: "🎊🎁🎉🚀", message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("Retry", comment: "Alert button to open Settings"), style: .`default`, handler: { _ in
+                self.restartGame()
+            }))
+            self.show(alertController, sender: nil )
+        }
+        else if (score > 0) {
+            let message = NSLocalizedString("You can do better. score:\(score) best score:\(bestScore)", comment: "Alert when user loose without best score")
+            let alertController = UIAlertController(title: "🙈🙈🙈", message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("Retry", comment: "Alert button to open Settings"), style: .`default`, handler: { _ in
+                self.restartGame()
+            }))
+            self.show(alertController, sender: nil )
+
+        }
+        else {
+            let message = NSLocalizedString("Look at the white box to prevent it from falling", comment: "Alert when user looses with score = 0")
+            let alertController = UIAlertController(title: "🙈🙈🙈", message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("Retry", comment: "Alert button to open Settings"), style: .`default`, handler: { _ in
+                self.restartGame()
+            }))
+            self.show(alertController, sender: nil )
+        }
     }
     
     @IBAction func fireAction() {
@@ -183,7 +202,7 @@ class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDele
                 animator?.removeBehavior(thrustBehavior)
             }
             let thrustBehavior = UIPushBehavior(items:[targetView], mode: .instantaneous)
-            thrustBehavior.magnitude = 10.0
+            thrustBehavior.magnitude = 1.0
             let direction = ((eyePositionIndicatorCenter.minX + eyePositionIndicatorCenter.maxX)/2 - targetView.center.x) / (targetView.frame.width/2)
             thrustBehavior.angle = -CGFloat(.pi / 2 + direction * .pi / 8)
             animator?.addBehavior(thrustBehavior)
@@ -232,14 +251,11 @@ class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDele
             if (eyePositionIndicatorCenter.intersects(self.targetView.frame)) {
                 //target view
                 self.targetView.backgroundColor = Appearance.darkBlueColor
-                self.fireButton.backgroundColor = UIColor.init(white: 1.0, alpha: 0.9)
-                self.fireButton.setTitle("SHOOT NOW", for:.normal)
+                self.fireAction()
             }
             else {
                 //target view
                 self.targetView.backgroundColor = Appearance.blueColor
-                self.fireButton.backgroundColor = Appearance.whiteColor
-                self.fireButton.setTitle("SHOOT WHERE YOU LOOK", for:.normal)
             }
         }
         
@@ -259,7 +275,10 @@ class PlayViewController: CameraViewController, ARSCNViewDelegate, ARSessionDele
     
     func collisionBehavior(_ behavior: UICollisionBehavior, beganContactFor item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying?, at p: CGPoint) {
         if (abs (p.y - targetView.superview!.bounds.height) < 3.0) {
-            score = 0
+            if gameStatus == .playing {
+                self.gameOver()
+                gameStatus = .loading
+            }
         }
     }
 }

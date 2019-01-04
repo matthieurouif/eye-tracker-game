@@ -18,13 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fuZ-w9-B5C">
-                                <rect key="frame" x="271" y="20" width="96" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="fuZ-w9-B5C" secondAttribute="height" multiplier="3:4" id="TxZ-94-TKD"/>
-                                    <constraint firstAttribute="width" constant="96" id="plb-X4-Zwp"/>
-                                </constraints>
-                            </arscnView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJK-3Q-WTR">
                                 <rect key="frame" x="16" y="36" width="343" height="138"/>
                                 <constraints>
@@ -34,11 +27,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fuZ-w9-B5C">
+                                <rect key="frame" x="271" y="20" width="96" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="fuZ-w9-B5C" secondAttribute="height" multiplier="3:4" id="TxZ-94-TKD"/>
+                                    <constraint firstAttribute="width" constant="96" id="plb-X4-Zwp"/>
+                                </constraints>
+                            </arscnView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q5z-B2-NO2" userLabel="Game View">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="523"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7je-W8-7ri" customClass="TargetView" customModule="Eye_Tracker" customModuleProvider="target">
-                                        <rect key="frame" x="137.5" y="211.5" width="100" height="100"/>
+                                        <rect key="frame" x="137.5" y="283.5" width="100" height="100"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="7je-W8-7ri" secondAttribute="height" multiplier="1:1" id="8DD-KN-FkR"/>
@@ -52,16 +52,6 @@
                                     <constraint firstItem="7je-W8-7ri" firstAttribute="centerX" secondItem="Q5z-B2-NO2" secondAttribute="centerX" id="DcL-ka-Dw8"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MtW-fZ-t6w">
-                                <rect key="frame" x="16" y="531" width="343" height="120"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="Jxk-C6-zVb"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="fireAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="3xB-H2-AkO"/>
-                                </connections>
-                            </button>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xcy-2Q-5fz" userLabel="Aim View">
                                 <rect key="frame" x="123.5" y="269.5" width="128" height="128"/>
                                 <subviews>
@@ -109,17 +99,14 @@
                         </subviews>
                         <color key="backgroundColor" red="0.8392156959" green="0.0" blue="0.19607843459999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MtW-fZ-t6w" secondAttribute="trailing" constant="16" id="1Uq-IX-epa"/>
                             <constraint firstItem="Q5z-B2-NO2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6bj-DG-9b1"/>
-                            <constraint firstItem="MtW-fZ-t6w" firstAttribute="top" secondItem="Q5z-B2-NO2" secondAttribute="bottom" constant="8" id="7mf-Ry-chp"/>
                             <constraint firstItem="Q5z-B2-NO2" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="E7u-bt-nsi"/>
                             <constraint firstItem="Q5z-B2-NO2" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Ena-I1-h49"/>
-                            <constraint firstItem="VJK-3Q-WTR" firstAttribute="trailing" secondItem="MtW-fZ-t6w" secondAttribute="trailing" id="GCk-ka-s2q"/>
-                            <constraint firstItem="VJK-3Q-WTR" firstAttribute="leading" secondItem="MtW-fZ-t6w" secondAttribute="leading" id="JdE-KQ-w4L"/>
-                            <constraint firstItem="MtW-fZ-t6w" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Raz-Gc-I4K"/>
                             <constraint firstItem="xcy-2Q-5fz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Vje-67-asp"/>
+                            <constraint firstItem="VJK-3Q-WTR" firstAttribute="centerX" secondItem="xcy-2Q-5fz" secondAttribute="centerX" id="YQv-dT-H9V"/>
                             <constraint firstItem="fuZ-w9-B5C" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="dAF-3x-Sge"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MtW-fZ-t6w" secondAttribute="bottom" constant="16" id="iw4-DD-nNr"/>
+                            <constraint firstItem="VJK-3Q-WTR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="lhq-vv-a6f"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Q5z-B2-NO2" secondAttribute="bottom" id="o6P-Iq-Zyy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fuZ-w9-B5C" secondAttribute="trailing" constant="8" id="prz-uA-Uvf"/>
                             <constraint firstItem="VJK-3Q-WTR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="q5H-uR-PVB"/>
                             <constraint firstItem="xcy-2Q-5fz" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="x2c-kh-Ywz"/>
@@ -129,7 +116,6 @@
                     <connections>
                         <outlet property="eyePositionIndicatorCenterView" destination="yE9-ah-dLM" id="QR7-H7-e7R"/>
                         <outlet property="eyePositionIndicatorView" destination="xcy-2Q-5fz" id="23Z-TH-KKs"/>
-                        <outlet property="fireButton" destination="MtW-fZ-t6w" id="Wkf-Hs-ei3"/>
                         <outlet property="gameView" destination="Q5z-B2-NO2" id="KiJ-I8-mm5"/>
                         <outlet property="sceneView" destination="fuZ-w9-B5C" id="q9I-zg-0Z6"/>
                         <outlet property="scoreLabel" destination="VJK-3Q-WTR" id="Iur-3F-aTv"/>
